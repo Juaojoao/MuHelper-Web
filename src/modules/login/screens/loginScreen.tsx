@@ -5,7 +5,7 @@ import '../styles/style.css'
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const {postRequest} = UseRequest();
+  const {authRequest} = UseRequest();
 
   const handleEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
@@ -15,13 +15,13 @@ const LoginScreen = () => {
     setPassword(event.target.value);
   }
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleForm = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    postRequest('http://localhost:1000/auth', {email, password})
+    await authRequest({email,password})
   }
 
   return (
-    <main className="form-signin" onSubmit={handleSubmit}>
+    <main className="form-signin" onSubmit={handleForm}>
       <form className="form">
         <img src="public\images\logo.png" alt="logo" width={120} height={60}/>
         <h1>Admin Panel</h1>
@@ -40,7 +40,7 @@ const LoginScreen = () => {
           onChange={handlePassword}
         />
 
-        <ButtonShared value={"Login"} />
+        <ButtonShared value={"Login"}/>
 
       </form>
     </main>

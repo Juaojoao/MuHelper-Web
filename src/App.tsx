@@ -1,10 +1,42 @@
-import LoginScreen from './modules/login';
 import './assets/style/global.css';
 
+import type { Router as RemixRouter } from '@remix-run/router';
+import { RouteObject, RouterProvider, createBrowserRouter} from 'react-router-dom';
+import { LoginRouter } from './modules/login/router';
+import { useNotification } from "./shared/hooks/useNotification";
+import { fristScreenRoutes } from './modules/firstScreen/routes';
+import { DashScreenRoutes } from './modules/dashboard/router';
+import { getAutorizationToken, verifyLogeedIn } from './shared/functions/connection/auth';
+import { useEffect } from 'react';
+import useRequest from './shared/hooks/useRequest';
+import { useGlobalContext } from './shared/hooks/useGlobalContext';
+import { USER_URL } from './shared/constants/urls';
+import { MethodsEnum } from './shared/enums/method.enum';
+
+const routes: RouteObject[] = [...fristScreenRoutes, ...LoginRouter];
+  const routesLoggedIn: RouteObject[] = [...DashScreenRoutes].map((route) => ({
+    ...route,
+    loader: () => verifyLogeedIn,
+  }));
+  
+  const router: RemixRouter = createBrowserRouter([...routes, ...routesLoggedIn]);
+
 export function App() {
+  const { contextHolder } = useNotification();
+  const { setUser } = useGlobalContext();
+  const { request } = useRequest();
+
+  useEffect(() => {
+    const token = getAutorizationToken();
+    if (token) {
+      request(USER_URL, MethodsEnum.GET, setUser);
+    }
+  }, []);
+
   return (
     <>
-      <LoginScreen />
+      {contextHolder} 
+      <RouterProvider router={router}/>
     </>
   );
 }
