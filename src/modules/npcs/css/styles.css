@@ -1,0 +1,5 @@
+.main-npc {
+  display: flex;
+  flex-direction: column;
+  gap: 200px;
+}

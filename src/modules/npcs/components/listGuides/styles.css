@@ -1,0 +1,57 @@
+.list-guides-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  gap: 40px;
+}
+
+.list-guides {
+  max-width: 200px;
+  height: 100px;
+  width: 100%;
+  position: relative;
+  display: flex;
+  border-radius: 10px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  align-items: flex-end;
+  justify-content: center;
+  padding: 10px 0;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.list-guides:hover {
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+.list-guides .guides h1 {
+  font-weight: 700;
+  color: #2196f3;
+  text-transform: uppercase;
+  width: 150px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.list-guides .guides .list-guides-image {
+  top: -50%;
+  left: 0;
+  position: absolute;
+}
+
+.list-guides .guides .list-guides-image img {
+  object-fit: contain;
+  animation: rotateAnimation 10s infinite linear;
+  transform-style: preserve-3d;
+  image-rendering: auto;
+}
+
+@keyframes rotateAnimation {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(360deg);
+  }
+}

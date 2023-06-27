@@ -1,0 +1,53 @@
+.getGuides {
+  position: relative;
+}
+
+.getGuidesContent {
+  margin-bottom: 30px;
+}
+
+.getGuidesContent .searchInput {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  max-width: 300px;
+}
+
+.form-content {
+  margin: 50px 10px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 20px;
+}
+
+.flex {
+  display: flex;
+  gap: 20px;
+}
+
+.input-content {
+  display: flex;
+  gap: 20px;
+  margin: 20px 0;
+}
+
+.input-content input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+}
+
+.ant-select {
+  border: 1px solid #ccc;
+  padding: 4px;
+  border-radius: 4px;
+  outline: none;
+}
+
+.input-content .w50 {
+  width: 50%;
+}

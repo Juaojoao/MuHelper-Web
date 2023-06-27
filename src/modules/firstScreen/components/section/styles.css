@@ -1,0 +1,124 @@
+section.section-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+}
+
+section.section-content > h1 {
+  font-size: 2rem;
+  color: #1677ff;
+  text-align: center;
+  text-transform: uppercase;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.wrap1 {
+  display: flex;
+  width: 80%;
+  height: 500px;
+  transform: skew(-5deg);
+}
+
+.wrap1 > a {
+  min-width: 0;
+  flex: 1 1 10px;
+  transition: 0.5s;
+  position: relative;
+  overflow: hidden;
+  perspective: 1000px;
+}
+
+.wrap1 > a:hover {
+  flex: 1 1 300px;
+  z-index: 10;
+}
+
+.wrap1 > a img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: 0.5s;
+}
+
+.npc-details {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(255 255 255 / 80%);
+  backdrop-filter: blur(10px);
+  padding: 20px;
+  text-align: center;
+  color: #1677ff;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(100%);
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.wrap1 a:hover .npc-details {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0%);
+}
+
+section.section-content .npc-details h3 {
+  font-size: 1.5rem;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  animation: fade-in 0.5s ease-in-out 0.3s forwards;
+}
+
+.npc-details p {
+  opacity: 0;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+  animation: fade-in 0.5s ease-in-out 0.3s forwards;
+}
+
+.npc-details a {
+  margin-top: 20px;
+}
+
+.npc-details button {
+  background-color: #1677ff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  opacity: 0;
+  border-radius: 5px;
+  border: 1px solid transparent;
+  box-shadow: 0 0 10px #1677ff;
+  animation: fade-in 0.5s ease-in-out 0.9s forwards;
+  transition: background-color 0.1s ease-in-out, color 0.3s ease-in-out;
+}
+
+.npc-details button:hover {
+  background-color: #fff;
+  color: #1677ff;
+  border: 1px solid #1677ff;
+  transition: background-color 0.1s ease-in-out, color 0.3s ease-in-out;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

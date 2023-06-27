@@ -1,26 +1,23 @@
-import '../input/style.css'
+import React from 'react';
+import { Input, InputProps } from 'antd';
 
-type props = {
-    name: string,
-    type: string,
-    placeholder: string,
-    onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void,
+interface Props extends InputProps {
+  name: string;
+  type: string;
+  placeholder?: string;
 }
 
-const InputShared = ({name, placeholder, type, onChange}: props) => {
-    return (
-        <div className='input-div-control'>
-            <input
-                className="input-control"
-                name={name}
-                id={name}
-                type={type}
-                required
-                onChange={onChange}
-            />
-            <label htmlFor={name} className='input-label-control'>{placeholder}</label>
-        </div>
-    );
-}
+const InputShared: React.FC<Props> = ({ name, placeholder, type, ...props }) => {
+  return (
+    <Input
+      name={name}
+      id={name}
+      type={type === '' ? 'text' : type}
+      placeholder={placeholder}
+      required
+      {...props}
+    />
+  );
+};
 
 export default InputShared;

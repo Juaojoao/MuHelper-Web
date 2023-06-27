@@ -1,18 +1,21 @@
-import { useNavigate } from "react-router-dom";
-import { useEffect } from "react"
-import { getAutorizationToken, unsetAutorizationToken } from "../../../shared/functions/connection/auth";
-import { connectionAPIGet } from "../../../shared/functions/connection/connectionAPI";
-import { GUIDE_URL, USER_URL } from "../../../shared/constants/urls";
-import { UseRequest } from "../../../shared";
-import { MethodsEnum } from "../../../shared/enums/method.enum";
-import { useDataContext } from "../../../shared/hooks/useDataContext";
-import { GuideType } from "../types/guidesType";
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import {
+  getAutorizationToken,
+  unsetAutorizationToken,
+} from '../../../shared/functions/connection/auth';
+import { connectionAPIGet } from '../../../shared/functions/connection/connectionAPI';
+import { GUIDE_URL, USER_URL } from '../../../shared/constants/urls';
+import { UseRequest } from '../../../shared';
+import { MethodsEnum } from '../../../shared/enums/method.enum';
+import { useDataContext } from '../../../shared/hooks/useDataContext';
+import { GuideType } from '../types/guidesType';
 
-import DashTemplate from "../components/Dashboard";
+import { DashTemplate } from '../components/Dashboard';
 
 const DashScreen = () => {
   const navigate = useNavigate();
-  const { setGuides, guides } = useDataContext();
+  const { setGuides } = useDataContext();
   const { request } = UseRequest();
 
   useEffect(() => {
@@ -21,13 +24,13 @@ const DashScreen = () => {
       if (token) {
         try {
           await connectionAPIGet(USER_URL);
-          navigate("/dashboard");
+          navigate('/dashboard');
         } catch (error) {
           unsetAutorizationToken();
-          navigate("/login");
+          navigate('/login');
         }
       } else {
-        navigate("/login");
+        navigate('/login');
       }
     };
 
@@ -38,7 +41,7 @@ const DashScreen = () => {
     request<GuideType[]>(GUIDE_URL, MethodsEnum.GET, setGuides);
   }, []);
 
-  return <DashTemplate/>;
+  return <DashTemplate />;
 };
 
 export default DashScreen;

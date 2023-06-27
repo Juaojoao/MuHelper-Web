@@ -18,17 +18,16 @@ const SiderDash: React.FC<SiderDashProps> = ({ onTabClick }) => {
   return (
     <Sider collapsible collapsed={collapsed} onCollapse={setCollapsed}>
       <div className="demo-logo-vertical" />
-      <Menu
-        theme="dark"
-        defaultSelectedKeys={['1']}
-        mode="inline"
-        onClick={handleMenuClick}
-      >
-        <Menu.Item key="home" icon={<HomeOutlined />}>Home</Menu.Item>
-        <Menu.Item key="guides" icon={<UserOutlined />}>Guides</Menu.Item>
+      <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" onClick={handleMenuClick}>
+        <Menu.Item key="home" icon={<HomeOutlined />}>
+          Home
+        </Menu.Item>
+        <Menu.Item key="guides" icon={<UserOutlined />}>
+          Guides
+        </Menu.Item>
       </Menu>
     </Sider>
   );
 };
-  
+
 export default SiderDash;

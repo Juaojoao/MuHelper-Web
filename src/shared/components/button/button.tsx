@@ -1,16 +1,14 @@
-import { ButtonHTMLAttributes } from 'react';
-import '../button/style.css';
+import { Button, ButtonProps } from 'antd';
 
-interface ButtonSharedProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  value: string;
-  loading?: boolean;
+interface ButtonSharedProps extends ButtonProps {
+  children: React.ReactNode;
 }
 
-const ButtomShared = ({ value, loading, ...props }: ButtonSharedProps) => {
+const ButtomShared = ({ children, ...props }: ButtonSharedProps) => {
   return (
-    <button className="btn" type="submit" {...props}>
-      {value}
-    </button>
+    <Button type="primary" {...props}>
+      {children}
+    </Button>
   );
 };
 
