@@ -5,7 +5,7 @@ import { GuideType } from '../../../dashboard/types/guidesType';
 import { URL_GET_GUIDE_ID } from '../../../../shared/constants/urls';
 import { MethodsEnum } from '../../../../shared/enums/method.enum';
 import { Spin } from 'antd';
-import { npcList } from '../../routes';
+import { npcList } from '../../../../shared/components/dataComponents/dataComponents';
 
 interface ListGuidesProps {
   npcId: string;
@@ -34,24 +34,25 @@ export const ListGuides = ({ npcId }: ListGuidesProps) => {
     return <Spin />;
   }
 
-  const npcName = npcList.find((npc) => npc.id === Number(npcId))?.name;
-
   return (
     <div className="list-guides-container">
       {guides.map((guide) => {
-        const linkTitle = guide.title?.toLowerCase().split(' ').join('-');
+        const npcName = npcList.find((npc) => npc.id === Number(npcId))?.name;
+
         return (
-          <a href={`/npc/${npcName}/${linkTitle}`} className="list-guides ">
-            <div key={guide.id} className="flex flex-align-justify-center">
-              <div className="guides">
-                {guide.images && guide.images?.length > 0 && (
-                  <div className="list-guides-image">
-                    <img src={guide.images} alt="" width={200} height={100} />
-                  </div>
-                )}
-                <div className="list-guides-title flex-align-justify-center flex-column">
-                  <h1>{guide.title}</h1>
+          <a
+            href={`/npc/${npcName}/${guide.guide.id}`}
+            key={guide.guide.id}
+            className="list-guides cards"
+          >
+            <div className="guides">
+              {guide.guide.images && guide.guide.images?.length > 0 && (
+                <div className="list-guides-image">
+                  <img src={guide.guide.images} alt="" width={200} height={100} />
                 </div>
+              )}
+              <div className="list-guides-title">
+                <h1>{guide.guide.title}</h1>
               </div>
             </div>
           </a>

@@ -19,7 +19,7 @@ const columns: ColumnsType<GuideType> = [
     title: 'Id',
     dataIndex: 'id',
     key: 'id',
-    sorter: (a, b) => (a.id ?? 0) - (b.id ?? 0),
+    sorter: (a, b) => (a.guide.id ?? 0) - (b.guide.id ?? 0),
     render: (text) => <a>{text}</a>,
   },
   {
@@ -32,17 +32,17 @@ const columns: ColumnsType<GuideType> = [
     title: 'NPC',
     dataIndex: 'npcID',
     key: 'npcID',
-    render: (_, guide) => <NpcCollumn npcId={guide.npcID} />,
+    render: (_, guide) => <NpcCollumn npcId={guide.guide.npcID} />,
   },
   {
     render: (_, guide) => {
       return (
         <div className="flex">
-          <EditGuides guideId={guide.id} />
+          <EditGuides guideId={guide.guide.id} />
           <Popconfirm
             title="Sure to delete?"
-            key={guide.id}
-            onConfirm={() => connectionAPIDelete(URL_DELETE_GUIDE(String(guide.id)))}
+            key={guide.guide.id}
+            onConfirm={() => connectionAPIDelete(URL_DELETE_GUIDE(String(guide.guide.id)))}
           >
             <a>
               <DeleteTwoTone />
@@ -58,7 +58,10 @@ const TableGuides = () => {
   const { guides } = useDataContext();
 
   return (
-    <Table columns={columns} dataSource={guides.map((guide) => ({ ...guide, key: guide.id }))} />
+    <Table
+      columns={columns}
+      dataSource={guides.map((guide) => ({ ...guide, key: guide.guide.id }))}
+    />
   );
 };
 

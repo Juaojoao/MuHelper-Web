@@ -1,10 +1,4 @@
-const npcList = [
-  { id: 1, name: 'chaos-machine' },
-  { id: 2, name: 'adniel' },
-  { id: 3, name: 'seed-master' },
-  { id: 4, name: 'trainer' },
-  { id: 5, name: 'harmony' },
-];
+import { npcList } from '../../../shared/components/dataComponents/dataComponents';
 
 const npcLink = npcList.map((npc) => npc.name);
 

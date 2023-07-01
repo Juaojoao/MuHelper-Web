@@ -12,10 +12,12 @@ const CreateGuide = () => {
   const [guideContent, setGuideContent] = useState('');
   const { request, loading } = UseRequest();
   const [guideData, setGuideData] = useState<GuideType>({
-    title: '',
-    content: '',
-    images: '',
-    npcID: 0,
+    guide: {
+      title: '',
+      content: '',
+      images: '',
+      npcID: 0,
+    },
   });
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
 
@@ -41,10 +43,12 @@ const CreateGuide = () => {
       );
 
       setGuideData({
-        title: '',
-        content: '',
-        images: '',
-        npcID: 0,
+        guide: {
+          title: '',
+          content: '',
+          images: '',
+          npcID: 0,
+        },
       });
       setGuideContent('');
       setSelectedCategory(null);
@@ -79,7 +83,7 @@ const CreateGuide = () => {
         <InputShared
           name="title"
           type="text"
-          value={guideData.title}
+          value={guideData.guide.title}
           onChange={handleTitleChange}
           placeholder="Título do Guia"
           className="w50"
@@ -94,7 +98,7 @@ const CreateGuide = () => {
         <InputShared
           name="title"
           type="text"
-          value={guideData.images}
+          value={guideData.guide.images}
           onChange={handleImageChange}
           placeholder="Url da Imagem"
         />

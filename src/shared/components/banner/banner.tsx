@@ -11,11 +11,9 @@ const BannnerBig = () => {
 const BannerFlexSmall = () => {
   return (
     <div className="banner-flex-small">
-      <div className="banner-flex-small-content">
-        <div className="banner-small"></div>
-        <div className="banner-small"></div>
-        <div className="banner-small"></div>
-      </div>
+      <div className="banner-small"></div>
+      <div className="banner-small"></div>
+      <div className="banner-small"></div>
     </div>
   );
 };

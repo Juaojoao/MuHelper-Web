@@ -1,6 +1,6 @@
 import '../css/styles.css';
 import { NpcsDataContent } from './npc.data';
-import { CardShared } from '../../../shared/components/card/card';
+import { CardShared } from '../../../shared/components/cards/cardNpcList';
 import { ListGuides } from '../components/listGuides/listGuides';
 import { ContentDefault } from '../../../shared/components/content/contentDefault';
 

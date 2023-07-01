@@ -16,9 +16,9 @@ interface EditGuideContentProps {
 const EditGuideContent = ({ guideId }: EditGuideContentProps) => {
   const { guides } = useDataContext();
   const { request, loading } = UseRequest();
-  const selectedGuide = guides.find((guide) => guide.id === guideId);
+  const selectedGuide = guides.find((guide) => guide.guide.id === guideId);
 
-  const [guideContent, setGuideContent] = useState(selectedGuide?.content || '');
+  const [guideContent, setGuideContent] = useState(selectedGuide?.guide.content || '');
 
   const handleEditorChange = (content: string) => {
     setGuideContent(content);
@@ -30,11 +30,13 @@ const EditGuideContent = ({ guideId }: EditGuideContentProps) => {
     }
 
     const updatedGuideData: GuideType = {
-      ...selectedGuide,
-      title: inputTitle,
-      content: guideContent,
-      images: inputImage,
-      npcID: Number(selectedNpcID),
+      guide: {
+        ...selectedGuide.guide,
+        id: selectedGuide.guide.id,
+        content: guideContent,
+        images: inputImage,
+        npcID: Number(selectedNpcID),
+      },
     };
 
     try {
@@ -55,9 +57,11 @@ const EditGuideContent = ({ guideId }: EditGuideContentProps) => {
     label: npcTypesMapping[Number(key)].label,
   }));
 
-  const [selectedNpcID, setSelectedNpcID] = useState<number | undefined>(selectedGuide?.npcID);
-  const [inputTitle, setInputTitle] = useState(selectedGuide?.title || '');
-  const [inputImage, setInputImage] = useState(selectedGuide?.images || '');
+  const [selectedNpcID, setSelectedNpcID] = useState<number | undefined>(
+    selectedGuide?.guide.npcID,
+  );
+  const [inputTitle, setInputTitle] = useState(selectedGuide?.guide.title || '');
+  const [inputImage, setInputImage] = useState(selectedGuide?.guide.images || '');
 
   const handleInputChange = (newValue: string) => {
     setInputTitle(newValue);
@@ -77,7 +81,7 @@ const EditGuideContent = ({ guideId }: EditGuideContentProps) => {
         <div className="form-content">
           <div className="input-content">
             <InputShared
-              placeholder={selectedGuide.title}
+              placeholder={selectedGuide.guide.title}
               value={inputTitle}
               onChange={(e) => handleInputChange(e.target.value)}
               className="w50"
@@ -86,14 +90,14 @@ const EditGuideContent = ({ guideId }: EditGuideContentProps) => {
             />
 
             <SelectShared
-              defaultValue={String(selectedGuide.npcID)}
+              defaultValue={String(selectedGuide.guide.npcID)}
               options={options}
               className="w50"
               onChange={handleNpcIDChange}
             />
 
             <InputShared
-              placeholder={selectedGuide.images}
+              placeholder={selectedGuide.guide.images}
               value={inputImage}
               onChange={(e) => handleNpcImageChange(e.target.value)}
               className="w50"
@@ -112,7 +116,7 @@ const EditGuideContent = ({ guideId }: EditGuideContentProps) => {
               content_style: 'body { direction: ltr !important; }',
               content_css: '../../../../../public/assets/css/styles.css',
             }}
-            initialValue={selectedGuide.content}
+            initialValue={selectedGuide.guide.content}
             onEditorChange={handleEditorChange}
           />
           <ButtonShared loading={loading} onClick={handleSave}>

@@ -90,3 +90,11 @@ export const logoData = {
   link: '/',
   title: 'logo',
 };
+
+export const npcList = [
+  { id: 1, name: 'chaos-machine' },
+  { id: 2, name: 'adniel' },
+  { id: 3, name: 'seed-master' },
+  { id: 4, name: 'trainer' },
+  { id: 5, name: 'harmony' },
+];
