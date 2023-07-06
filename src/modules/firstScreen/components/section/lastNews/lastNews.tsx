@@ -26,15 +26,15 @@ export const LastNews = ({ npcId }: { npcId: number }) => {
 
   return (
     <div className="card-news-div cards">
-      {lastNews?.map((guide) => {
+      {lastNews?.map((lastGuides) => {
         const npcName = npcList.find((npc) => npc.id === npcId)?.name;
 
         return (
           <CardNews
-            path={`/npc/${npcName}/${guide.guide.id}`}
-            images={guide.guide.images?.[0] || ''}
-            title={guide.guide.title || ''}
-            key={guide.guide.id}
+            path={`/npc/${npcName}/${lastGuides.guide.id}`}
+            images={lastGuides.guide.images?.[0] || ''}
+            title={lastGuides.guide.title || ''}
+            key={lastGuides.guide.id}
           />
         );
       })}

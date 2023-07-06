@@ -64,13 +64,21 @@ main div.container {
 }
 
 .content {
-  border-radius: 10px;
   text-align: center;
-  display: flex;
   flex-direction: column;
-  padding: 30px;
   align-items: center;
   display: flex;
+  gap: 30px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.content h1 {
+  color: var(--primary-color);
+  font-size: 3rem;
+  font-weight: 600;
+  margin: 0;
+  padding: 10px;
+  border-bottom: 1px solid var(--primary-color);
 }
 
 .content h3 {
@@ -91,7 +99,7 @@ main div.container {
   align-items: flex-start;
 }
 
-.steps {
+.steps-item {
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -125,6 +133,12 @@ p.title-epic {
   max-width: 100%;
 }
 
+.required-materials {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
 .required-materials ul {
   text-align: left;
   margin-bottom: 20px;
@@ -141,6 +155,7 @@ p.title-epic {
 
 .imgs img {
   max-width: 450px;
+  width: 100%;
   border-radius: 10px;
   box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.3);
 }
@@ -156,30 +171,6 @@ p.title-epic {
 .notes ul li,
 .required-materials ul li {
   list-style-type: initial;
-}
-
-.pag-Wrap {
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  margin-top: 100px;
-}
-
-.pag-Wrap .card {
-  width: 45%;
-}
-
-.conteudoWrap {
-  margin-top: 100px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 40px;
-  display: flex;
 }
 
 .red {
@@ -219,9 +210,16 @@ p.title-epic {
   display: flex;
   justify-content: center;
   gap: 30px;
-  margin: 20px;
+  margin: 60px 20px;
 }
 
 .npc-guides-content a button:hover {
   background-color: #1b81bd;
+}
+
+@media (max-width: 480px) {
+  .npc-guides-content .buttonsGuides {
+    flex-direction: column;
+    align-items: center;
+  }
 }

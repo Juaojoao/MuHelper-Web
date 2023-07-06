@@ -9,7 +9,7 @@ export const URL_DELETE_GUIDE = (id: string) => {
   return `${URL}/guides/delete/${id}`;
 };
 
-export const URL_EDIT_GUIDE = (id: string) => {
+export const URL_EDIT_GUIDE = (id?: number) => {
   return `${URL}/guides/update/${id}`;
 };
 

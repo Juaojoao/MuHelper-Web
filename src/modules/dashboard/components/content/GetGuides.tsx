@@ -2,7 +2,7 @@ import './styles/styles.css';
 
 import type { ColumnsType } from 'antd/es/table';
 import Table from '../../../../shared/components/table/table';
-import { GuideType } from '../../types/guidesType';
+import { GuideType, Guides } from '../../types/guidesType';
 import { useDataContext } from '../../../../shared/hooks/useDataContext';
 import SearchInput from '../../../../shared/components/input/SearchInput';
 import CreateGuides from './CreateGuides';
@@ -14,12 +14,12 @@ import { URL_DELETE_GUIDE } from '../../../../shared/constants/urls';
 import EditGuides from './EditGuides';
 import NpcCollumn from './NpcCollumn';
 
-const columns: ColumnsType<GuideType> = [
+const columns: ColumnsType<Guides> = [
   {
     title: 'Id',
     dataIndex: 'id',
     key: 'id',
-    sorter: (a, b) => (a.guide.id ?? 0) - (b.guide.id ?? 0),
+    sorter: (a, b) => (a.id ?? 0) - (b.id ?? 0),
     render: (text) => <a>{text}</a>,
   },
   {
@@ -32,17 +32,17 @@ const columns: ColumnsType<GuideType> = [
     title: 'NPC',
     dataIndex: 'npcID',
     key: 'npcID',
-    render: (_, guide) => <NpcCollumn npcId={guide.guide.npcID} />,
+    render: (_, guide) => <NpcCollumn npcId={guide.npcID} />,
   },
   {
     render: (_, guide) => {
       return (
         <div className="flex">
-          <EditGuides guideId={guide.guide.id} />
+          <EditGuides guideId={guide.id} />
           <Popconfirm
             title="Sure to delete?"
-            key={guide.guide.id}
-            onConfirm={() => connectionAPIDelete(URL_DELETE_GUIDE(String(guide.guide.id)))}
+            key={guide.id}
+            onConfirm={() => connectionAPIDelete(URL_DELETE_GUIDE(String(guide.id)))}
           >
             <a>
               <DeleteTwoTone />
@@ -60,7 +60,7 @@ const TableGuides = () => {
   return (
     <Table
       columns={columns}
-      dataSource={guides.map((guide) => ({ ...guide, key: guide.guide.id }))}
+      dataSource={guides.map((guideMap) => ({ ...guideMap, key: guideMap.id }))}
     />
   );
 };

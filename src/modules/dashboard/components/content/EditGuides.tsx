@@ -2,7 +2,7 @@ import { Editor } from '@tinymce/tinymce-react';
 import { useState } from 'react';
 import ModalShared from '../../../../shared/components/modal/Modal';
 import { useDataContext } from '../../../../shared/hooks/useDataContext';
-import { GuideType } from '../../types/guidesType';
+import { GuideType, Guides } from '../../types/guidesType';
 import { URL_EDIT_GUIDE } from '../../../../shared/constants/urls';
 import { ButtonShared, InputShared, UseRequest } from '../../../../shared';
 import SelectShared from '../../../../shared/components/input/Select';
@@ -10,15 +10,15 @@ import { npcTypesMapping } from './NpcCollumn';
 import { MethodsEnum } from '../../../../shared/enums/method.enum';
 
 interface EditGuideContentProps {
-  guideId: number | undefined;
+  guideId?: number;
 }
 
 const EditGuideContent = ({ guideId }: EditGuideContentProps) => {
   const { guides } = useDataContext();
   const { request, loading } = UseRequest();
-  const selectedGuide = guides.find((guide) => guide.guide.id === guideId);
+  const selectedGuide = guides.find((guide) => guide.id === guideId);
 
-  const [guideContent, setGuideContent] = useState(selectedGuide?.guide.content || '');
+  const [guideContent, setGuideContent] = useState(selectedGuide?.content || '');
 
   const handleEditorChange = (content: string) => {
     setGuideContent(content);
@@ -29,19 +29,17 @@ const EditGuideContent = ({ guideId }: EditGuideContentProps) => {
       return;
     }
 
-    const updatedGuideData: GuideType = {
-      guide: {
-        ...selectedGuide.guide,
-        id: selectedGuide.guide.id,
-        content: guideContent,
-        images: inputImage,
-        npcID: Number(selectedNpcID),
-      },
+    const updatedGuideData: Guides = {
+      ...selectedGuide,
+      npcID: selectedNpcID,
+      title: inputTitle,
+      content: guideContent,
+      images: inputImage,
     };
 
     try {
-      await request<GuideType>(
-        URL_EDIT_GUIDE(String(guideId)),
+      await request<Guides>(
+        URL_EDIT_GUIDE(guideId),
         MethodsEnum.PATCH,
         undefined,
         updatedGuideData,
@@ -57,11 +55,9 @@ const EditGuideContent = ({ guideId }: EditGuideContentProps) => {
     label: npcTypesMapping[Number(key)].label,
   }));
 
-  const [selectedNpcID, setSelectedNpcID] = useState<number | undefined>(
-    selectedGuide?.guide.npcID,
-  );
-  const [inputTitle, setInputTitle] = useState(selectedGuide?.guide.title || '');
-  const [inputImage, setInputImage] = useState(selectedGuide?.guide.images || '');
+  const [selectedNpcID, setSelectedNpcID] = useState<number | undefined>(selectedGuide?.npcID);
+  const [inputTitle, setInputTitle] = useState(selectedGuide?.title || '');
+  const [inputImage, setInputImage] = useState(selectedGuide?.images || '');
 
   const handleInputChange = (newValue: string) => {
     setInputTitle(newValue);
@@ -81,7 +77,7 @@ const EditGuideContent = ({ guideId }: EditGuideContentProps) => {
         <div className="form-content">
           <div className="input-content">
             <InputShared
-              placeholder={selectedGuide.guide.title}
+              placeholder={selectedGuide.title}
               value={inputTitle}
               onChange={(e) => handleInputChange(e.target.value)}
               className="w50"
@@ -90,14 +86,14 @@ const EditGuideContent = ({ guideId }: EditGuideContentProps) => {
             />
 
             <SelectShared
-              defaultValue={String(selectedGuide.guide.npcID)}
+              defaultValue={String(selectedGuide.npcID)}
               options={options}
               className="w50"
               onChange={handleNpcIDChange}
             />
 
             <InputShared
-              placeholder={selectedGuide.guide.images}
+              placeholder={selectedGuide.images}
               value={inputImage}
               onChange={(e) => handleNpcImageChange(e.target.value)}
               className="w50"
@@ -116,7 +112,7 @@ const EditGuideContent = ({ guideId }: EditGuideContentProps) => {
               content_style: 'body { direction: ltr !important; }',
               content_css: '../../../../../public/assets/css/styles.css',
             }}
-            initialValue={selectedGuide.guide.content}
+            initialValue={selectedGuide.content}
             onEditorChange={handleEditorChange}
           />
           <ButtonShared loading={loading} onClick={handleSave}>

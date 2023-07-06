@@ -19,6 +19,12 @@ const SidebarLink = styled(Link)`
     border-left: 4px solid #2196f3;
     cursor: pointer;
   }
+
+  @media (min-width: 768px) {
+    &:hover {
+      border: 0;
+    }
+  }
 `;
 
 const SidebarLabel = styled.span`
@@ -29,7 +35,9 @@ const SubMenuContainer = styled.div<{ isOpen: boolean }>`
   overflow: auto;
   max-height: ${({ isOpen }) => (isOpen ? '400px' : '0')};
   border-radius: 0 0 0 10px;
-  transition: max-height 0.3s ease, border-radius 0.3s ease;
+  background: #414757;
+
+  transition: all 0.3s ease;
 
   &::-webkit-scrollbar {
     width: 2px;
@@ -42,10 +50,23 @@ const SubMenuContainer = styled.div<{ isOpen: boolean }>`
   &::-webkit-scrollbar-thumb {
     background: #2196f3;
   }
+
+  @media (min-width: 768px) {
+    border-radius: 0 0 5px 5px;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 999;
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    transition: all 0.3s ease;
+  }
 `;
 
 const DropdownLink = styled(Link)`
-  background: #414757;
   height: 40px;
   display: flex;
   align-items: center;
@@ -56,6 +77,10 @@ const DropdownLink = styled(Link)`
   &:hover {
     background: rgb(26, 56, 148);
     cursor: pointer;
+  }
+
+  @media (min-width: 768px) {
+    padding: 20px;
   }
 `;
 

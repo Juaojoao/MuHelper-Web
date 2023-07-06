@@ -26,11 +26,15 @@ const NavIcon = styled(Link)`
   display: flex;
   justify-content: flex-start;
   align-items: center;
+
+  @media (min-width: 768px) {
+    display: none;
+  }
 `;
 
 const SidebarNav = styled.nav<{ sidebar: boolean }>`
   background: #15171c;
-  width: 250px;
+  width: 90vw;
   height: 95vh;
   display: flex;
   justify-content: center;
@@ -40,10 +44,22 @@ const SidebarNav = styled.nav<{ sidebar: boolean }>`
   transition: 350ms ease-in-out;
   z-index: 10;
   padding: 10px;
+
+  @media (min-width: 768px) {
+    display: none;
+  }
 `;
 
 const SidebarWrap = styled.div`
   width: 100%;
+`;
+
+const SubMenuList = styled.div`
+  display: none;
+
+  @media (min-width: 768px) {
+    display: flex;
+  }
 `;
 
 type SidebarProps = {
@@ -54,13 +70,12 @@ type SidebarProps = {
 };
 
 export const Sidebar = ({
-  isSidebarActive,
   handleSidebarToggle,
 }: {
   isSidebarActive: boolean;
   handleSidebarToggle: () => void;
 }) => {
-  const [sidebar, setSidebar] = useState(true);
+  const [sidebar, setSidebar] = useState(false);
 
   const showSidebar = () => {
     setSidebar(!sidebar);
@@ -79,6 +94,11 @@ export const Sidebar = ({
               <img src={logoData.logo} alt={logoData.title} width={80} />
             </a>
           </div>
+          <SubMenuList>
+            {menuItens.map((item: SidebarProps, index: number) => {
+              return <SubMenu item={item} key={index} />;
+            })}
+          </SubMenuList>
         </Nav>
         <SidebarNav sidebar={sidebar}>
           <SidebarWrap>
